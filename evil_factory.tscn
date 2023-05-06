@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://e7bsqapnrlot"]
+
+[ext_resource type="Script" path="res://evil_factory.gd" id="1_qvgby"]
+[ext_resource type="Texture2D" uid="uid://dsxfqxg5bk0em" path="res://factory_stub.png" id="1_u0pfq"]
+[ext_resource type="Script" path="res://PollutionTicker.gd" id="3_73koe"]
+
+[node name="EvilFactory" type="Node2D"]
+script = ExtResource("1_qvgby")
+
+[node name="FactoryStub" type="Sprite2D" parent="."]
+position = Vector2(1, -2)
+texture = ExtResource("1_u0pfq")
+
+[node name="PollutionTicker" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+script = ExtResource("3_73koe")
+
+[connection signal="timeout" from="PollutionTicker" to="." method="_on_timer_timeout"]
