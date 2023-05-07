@@ -18,3 +18,12 @@ offset_right = 422.0
 offset_bottom = 102.0
 text = "test"
 label_settings = SubResource("LabelSettings_t3s3x")
+
+[node name="CreateTree" type="Button" parent="."]
+offset_left = 587.0
+offset_top = 11.0
+offset_right = 674.0
+offset_bottom = 67.0
+text = "Place tree"
+
+[connection signal="pressed" from="CreateTree" to="." method="_on_create_tree_pressed"]

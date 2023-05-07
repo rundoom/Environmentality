@@ -11,6 +11,9 @@ tile_set = SubResource("TileSet_3vnlt")
 format = 2
 script = ExtResource("1_3hgch")
 
+[node name="PollutionTimer" type="Timer" parent="."]
+autostart = true
+
 [node name="UI" parent="." instance=ExtResource("1_swxm8")]
 
 [node name="EvilFactory" parent="." instance=ExtResource("2_3n5a3")]
@@ -23,7 +26,7 @@ position = Vector2(257, 336)
 position = Vector2(746, 491)
 
 [node name="EvilFactory4" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(737, 122)
+position = Vector2(750, 211)
 
 [node name="EvilFactory5" parent="." instance=ExtResource("2_3n5a3")]
 position = Vector2(474, 147)
@@ -32,9 +35,4 @@ position = Vector2(474, 147)
 position = Vector2(963, 302)
 
 [connection signal="pollution_changed" from="." to="UI" method="set_pollution"]
-[connection signal="pollution_changed" from="EvilFactory" to="." method="chnage_pollution"]
-[connection signal="pollution_changed" from="EvilFactory2" to="." method="chnage_pollution"]
-[connection signal="pollution_changed" from="EvilFactory3" to="." method="chnage_pollution"]
-[connection signal="pollution_changed" from="EvilFactory4" to="." method="chnage_pollution"]
-[connection signal="pollution_changed" from="EvilFactory5" to="." method="chnage_pollution"]
-[connection signal="pollution_changed" from="EvilFactory6" to="." method="chnage_pollution"]
+[connection signal="timeout" from="PollutionTimer" to="." method="_on_pollution_timer_timeout"]

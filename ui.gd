@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 
+@onready var world = get_tree().get_first_node_in_group("world")
+
+
 var abbreviation = {
 	1000_000_000: "B",
 	1000_000: "M",
@@ -24,10 +27,13 @@ var old_pollution := 0:
 		
 var polution_tween: Tween
 var tweening_interval: float
+
+var TreeSc = preload("res://tree.tscn")
+var building_shadow: Node2D
 		
 		
 func _ready() -> void:
-	tweening_interval = get_tree().get_first_node_in_group("world").pollution_tick
+	tweening_interval = world.pollution_tick
 
 		
 func set_tweening_interval(val: float):
@@ -39,3 +45,19 @@ func set_pollution(new_val: int):
 		
 	polution_tween = create_tween()
 	polution_tween.tween_property(self, "old_pollution", new_val, tweening_interval)
+
+
+func _input(event):
+	if building_shadow != null and event is InputEventMouseMotion:
+		building_shadow.position = event.position
+	if building_shadow != null and event is InputEventMouseButton:
+		building_shadow.queue_free()
+		var real_tree = TreeSc.instantiate()
+		world.add_child(real_tree)
+		real_tree.position = event.position
+
+
+func _on_create_tree_pressed() -> void:
+	building_shadow = GeneralLogic.shadow_building(TreeSc)
+	world.add_child(building_shadow)
+	
