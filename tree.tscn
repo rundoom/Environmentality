@@ -12,5 +12,5 @@ pollution_change = -50
 [node name="FactoryStub" parent="." index="0"]
 texture = ExtResource("1_n7eqb")
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_41na6")

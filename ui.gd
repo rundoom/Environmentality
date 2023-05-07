@@ -10,6 +10,8 @@ var abbreviation = {
 	1000: "K",
 }
 
+var global_cooldown := 0
+
 var text_template = "{0}{1}"
 var old_pollution := 0:
 	set(value):
@@ -55,9 +57,21 @@ func _input(event):
 		var real_tree = TreeSc.instantiate()
 		world.add_child(real_tree)
 		real_tree.position = event.position
+		
+		var cooldown_tween = get_tree().create_tween()
+		
+		for it in get_tree().get_nodes_in_group("cooldown_holder"):
+			it.value = it.max_value
+			toogle_cooldown_lockable(true)
+			cooldown_tween.tween_property(it, "value", 0, real_tree.place_cooldown)
+			cooldown_tween.finished.connect(toogle_cooldown_lockable.bind(false))
 
 
 func _on_create_tree_pressed() -> void:
 	building_shadow = GeneralLogic.shadow_building(TreeSc)
 	world.add_child(building_shadow)
-	
+
+
+func toogle_cooldown_lockable(disable: bool):
+	for button in get_tree().get_nodes_in_group("cooldown_lockable"):
+		button.disabled = disable

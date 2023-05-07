@@ -17,22 +17,40 @@ autostart = true
 [node name="UI" parent="." instance=ExtResource("1_swxm8")]
 
 [node name="EvilFactory" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(520, 311)
+position = Vector2(316, 311)
 
 [node name="EvilFactory2" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(257, 336)
+position = Vector2(170, 307)
 
 [node name="EvilFactory3" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(746, 491)
+position = Vector2(464, 447)
 
 [node name="EvilFactory4" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(750, 211)
+position = Vector2(469, 173)
 
 [node name="EvilFactory5" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(474, 147)
+position = Vector2(320, 172)
 
 [node name="EvilFactory6" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(963, 302)
+position = Vector2(606, 444)
+
+[node name="EvilFactory7" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(316, 447)
+
+[node name="EvilFactory8" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(160, 449)
+
+[node name="EvilFactory9" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(612, 172)
+
+[node name="EvilFactory10" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(463, 310)
+
+[node name="EvilFactory11" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(170, 172)
+
+[node name="EvilFactory12" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(605, 307)
 
 [connection signal="pollution_changed" from="." to="UI" method="set_pollution"]
-[connection signal="timeout" from="PollutionTimer" to="." method="_on_pollution_timer_timeout"]
+[connection signal="timeout" from="PollutionTimer" to="." method="emit_pollution"]
