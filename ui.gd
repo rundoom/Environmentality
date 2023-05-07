@@ -31,6 +31,8 @@ var polution_tween: Tween
 var tweening_interval: float
 
 var TreeSc = preload("res://tree.tscn")
+var ShadowSc = preload("res://shadow_building.tscn")
+
 var building_shadow: Node2D
 		
 		
@@ -53,7 +55,7 @@ func _input(event):
 	if building_shadow != null and event is InputEventMouseMotion:
 		building_shadow.position = event.position
 		
-	if building_shadow != null and event is InputEventMouseButton:
+	if building_shadow != null and event is InputEventMouseButton and !building_shadow.is_overlapping:
 		building_shadow.queue_free()
 		var real_tree = TreeSc.instantiate()
 		world.add_child(real_tree)
@@ -70,7 +72,8 @@ func _input(event):
 			
 
 func _on_create_tree_pressed() -> void:
-	building_shadow = GeneralLogic.shadow_building(TreeSc)
+	building_shadow = ShadowSc.instantiate()
+	building_shadow.ShadowedSc = TreeSc
 	world.add_child(building_shadow)
 
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cty4sr6b7fpb5"]
+
+[ext_resource type="Script" path="res://ShadowBuilding.gd" id="1_y0e3f"]
+
+[node name="ShadowBuilding" type="Area2D"]
+modulate = Color(1, 1, 1, 0.329412)
+script = ExtResource("1_y0e3f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

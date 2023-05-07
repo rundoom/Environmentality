@@ -9,9 +9,8 @@ size = Vector2(128, 128)
 [node name="EvilFactory" type="StaticBody2D" groups=["pollution_changer"]]
 script = ExtResource("1_qvgby")
 
-[node name="FactoryStub" type="Sprite2D" parent="."]
-position = Vector2(1, -2)
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_u0pfq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g6oqt")

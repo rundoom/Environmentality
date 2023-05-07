@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GeneralLogic="*res://general_logic.gd"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/d_b_o/OneDrive/Документы/GodotProjects/Environmentality/out/footage/footage.avi"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
