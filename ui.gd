@@ -23,19 +23,19 @@ var old_pollution := 0:
 		
 		
 var polution_tween: Tween
-var tweening_interval: float = 0.1:
-	set = set_tweening_interval
+var tweening_interval: float
 		
+		
+func _ready() -> void:
+	tweening_interval = get_tree().get_first_node_in_group("world").pollution_tick
+
 		
 func set_tweening_interval(val: float):
 	tweening_interval = val
 
 
 func set_pollution(new_val: int):
-	if polution_tween == null:
-		polution_tween = create_tween()
-	else:
-		polution_tween.stop()
-		polution_tween = create_tween()
+	if polution_tween != null: polution_tween.stop()
 		
+	polution_tween = create_tween()
 	polution_tween.tween_property(self, "old_pollution", new_val, tweening_interval)

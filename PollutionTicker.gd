@@ -4,5 +4,5 @@ signal timeout_set(val: int)
 
 
 func _ready() -> void:
-	print(wait_time)
-	timeout_set.emit(wait_time)
+	wait_time = get_tree().get_first_node_in_group("world").pollution_tick
+	pass

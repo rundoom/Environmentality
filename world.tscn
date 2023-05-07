@@ -1,20 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxuvcxacynwbp"]
+[gd_scene load_steps=5 format=3 uid="uid://bxuvcxacynwbp"]
 
+[ext_resource type="Script" path="res://world.gd" id="1_3hgch"]
 [ext_resource type="PackedScene" uid="uid://ddq4ojbkaqunw" path="res://ui.tscn" id="1_swxm8"]
 [ext_resource type="PackedScene" uid="uid://e7bsqapnrlot" path="res://evil_factory.tscn" id="2_3n5a3"]
 
 [sub_resource type="TileSet" id="TileSet_3vnlt"]
 
-[node name="World" type="TileMap"]
+[node name="World" type="TileMap" groups=["world"]]
 tile_set = SubResource("TileSet_3vnlt")
 format = 2
+script = ExtResource("1_3hgch")
 
 [node name="UI" parent="." instance=ExtResource("1_swxm8")]
 
 [node name="EvilFactory" parent="." instance=ExtResource("2_3n5a3")]
 position = Vector2(520, 311)
 
-[connection signal="pollution_changed" from="EvilFactory" to="UI" method="set_pollution"]
-[connection signal="timeout_set" from="EvilFactory/PollutionTicker" to="UI" method="set_tweening_interval"]
+[node name="EvilFactory2" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(257, 336)
 
-[editable path="EvilFactory"]
+[node name="EvilFactory3" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(746, 491)
+
+[node name="EvilFactory4" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(737, 122)
+
+[node name="EvilFactory5" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(474, 147)
+
+[node name="EvilFactory6" parent="." instance=ExtResource("2_3n5a3")]
+position = Vector2(963, 302)
+
+[connection signal="pollution_changed" from="." to="UI" method="set_pollution"]
+[connection signal="pollution_changed" from="EvilFactory" to="." method="chnage_pollution"]
+[connection signal="pollution_changed" from="EvilFactory2" to="." method="chnage_pollution"]
+[connection signal="pollution_changed" from="EvilFactory3" to="." method="chnage_pollution"]
+[connection signal="pollution_changed" from="EvilFactory4" to="." method="chnage_pollution"]
+[connection signal="pollution_changed" from="EvilFactory5" to="." method="chnage_pollution"]
+[connection signal="pollution_changed" from="EvilFactory6" to="." method="chnage_pollution"]
