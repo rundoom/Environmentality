@@ -52,6 +52,7 @@ func set_pollution(new_val: int):
 func _input(event):
 	if building_shadow != null and event is InputEventMouseMotion:
 		building_shadow.position = event.position
+		
 	if building_shadow != null and event is InputEventMouseButton:
 		building_shadow.queue_free()
 		var real_tree = TreeSc.instantiate()
@@ -59,13 +60,14 @@ func _input(event):
 		real_tree.position = event.position
 		
 		var cooldown_tween = get_tree().create_tween()
+		cooldown_tween.set_parallel(true)
+		toogle_cooldown_lockable(true)
+		cooldown_tween.finished.connect(toogle_cooldown_lockable.bind(false))
 		
 		for it in get_tree().get_nodes_in_group("cooldown_holder"):
 			it.value = it.max_value
-			toogle_cooldown_lockable(true)
 			cooldown_tween.tween_property(it, "value", 0, real_tree.place_cooldown)
-			cooldown_tween.finished.connect(toogle_cooldown_lockable.bind(false))
-
+			
 
 func _on_create_tree_pressed() -> void:
 	building_shadow = GeneralLogic.shadow_building(TreeSc)
