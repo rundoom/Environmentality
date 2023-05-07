@@ -25,3 +25,7 @@ func _on_pollution_timer_timeout() -> void:
 	var changes_arr = get_tree().get_nodes_in_group("pollution_changer").map(func(it): return it.pollution_change)
 	var total_change = changes_arr.reduce(func(accum, number): return accum + number, 0)
 	chnage_pollution(total_change)
+
+
+func _ready() -> void:
+	_on_pollution_timer_timeout()
