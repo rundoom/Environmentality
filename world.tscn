@@ -1,56 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxuvcxacynwbp"]
+[gd_scene load_steps=6 format=3 uid="uid://bxuvcxacynwbp"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_3hgch"]
 [ext_resource type="PackedScene" uid="uid://ddq4ojbkaqunw" path="res://ui.tscn" id="1_swxm8"]
-[ext_resource type="PackedScene" uid="uid://e7bsqapnrlot" path="res://evil_factory.tscn" id="2_3n5a3"]
+[ext_resource type="Script" path="res://GoblinNavigation.gd" id="2_m6gbs"]
 
 [sub_resource type="TileSet" id="TileSet_3vnlt"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ysrwr"]
+vertices = PackedVector2Array(77, 83, 1081, 87, 1085, 563, 84, 573)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(77, 83, 1081, 87, 1085, 563, 84, 573)])
 
 [node name="World" type="TileMap" groups=["world"]]
 tile_set = SubResource("TileSet_3vnlt")
 format = 2
 script = ExtResource("1_3hgch")
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["navigator"]]
+navigation_polygon = SubResource("NavigationPolygon_ysrwr")
+script = ExtResource("2_m6gbs")
+
 [node name="PollutionTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource("1_swxm8")]
 
-[node name="EvilFactory" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(316, 311)
+[node name="Marker2D" type="Marker2D" parent="." groups=["test_target"]]
+position = Vector2(987, 366)
 
-[node name="EvilFactory2" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(170, 307)
-
-[node name="EvilFactory3" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(464, 447)
-
-[node name="EvilFactory4" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(469, 173)
-
-[node name="EvilFactory5" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(320, 172)
-
-[node name="EvilFactory6" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(606, 444)
-
-[node name="EvilFactory7" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(316, 447)
-
-[node name="EvilFactory8" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(160, 449)
-
-[node name="EvilFactory9" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(612, 172)
-
-[node name="EvilFactory10" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(463, 310)
-
-[node name="EvilFactory11" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(170, 172)
-
-[node name="EvilFactory12" parent="." instance=ExtResource("2_3n5a3")]
-position = Vector2(605, 307)
+[node name="Polygon2D" type="Polygon2D" parent="."]
 
 [connection signal="pollution_changed" from="." to="UI" method="set_pollution"]
 [connection signal="timeout" from="PollutionTimer" to="." method="emit_pollution"]

@@ -1,5 +1,11 @@
-extends Node2D
+extends PollutionEmitter
 
 
-@export var pollution_change := 10
-@export var place_cooldown := 5.0
+var GoblicSc = preload("res://goblin.tscn")
+
+func _ready() -> void:
+	super._ready()
+	var goblin = GoblicSc.instantiate()
+	goblin.global_position = global_position
+	GeneralLogic.get_world().add_child.call_deferred(goblin)
+	

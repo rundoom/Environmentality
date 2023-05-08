@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu5m8fetnb84h"]
+
+[ext_resource type="Script" path="res://goblin.gd" id="1_ilf7p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hkvjs"]
+
+[node name="Goblin" type="CharacterBody2D"]
+script = ExtResource("1_ilf7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hkvjs")
+debug_color = Color(0, 0.121569, 0.14902, 1)
+
+[node name="Navigator" type="NavigationAgent2D" parent="."]
+
+[connection signal="velocity_computed" from="Navigator" to="." method="_on_navigator_velocity_computed"]
