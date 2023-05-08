@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxuvcxacynwbp"]
+[gd_scene load_steps=7 format=3 uid="uid://bxuvcxacynwbp"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_3hgch"]
 [ext_resource type="PackedScene" uid="uid://ddq4ojbkaqunw" path="res://ui.tscn" id="1_swxm8"]
 [ext_resource type="Script" path="res://GoblinNavigation.gd" id="2_m6gbs"]
+[ext_resource type="PackedScene" uid="uid://4w2fkcmqewcn" path="res://tree.tscn" id="4_qdq1n"]
 
 [sub_resource type="TileSet" id="TileSet_3vnlt"]
 
@@ -30,5 +31,18 @@ position = Vector2(987, 366)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
+[node name="Tree" parent="." instance=ExtResource("4_qdq1n")]
+position = Vector2(303.257, 264.348)
+
+[node name="Tree2" parent="." instance=ExtResource("4_qdq1n")]
+position = Vector2(518, 266)
+
+[node name="Tree3" parent="." instance=ExtResource("4_qdq1n")]
+position = Vector2(409.878, 415.502)
+
 [connection signal="pollution_changed" from="." to="UI" method="set_pollution"]
 [connection signal="timeout" from="PollutionTimer" to="." method="emit_pollution"]
+
+[editable path="Tree"]
+[editable path="Tree2"]
+[editable path="Tree3"]
