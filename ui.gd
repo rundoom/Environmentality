@@ -58,8 +58,8 @@ func _input(event):
 	if building_shadow != null and event is InputEventMouseButton and !building_shadow.is_overlapping:
 		building_shadow.queue_free()
 		var real_tree = TreeSc.instantiate()
-		world.add_child(real_tree)
 		real_tree.position = event.position
+		world.add_child(real_tree)
 		
 		var cooldown_tween = get_tree().create_tween()
 		cooldown_tween.set_parallel(true)

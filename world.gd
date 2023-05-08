@@ -1,4 +1,5 @@
 extends TileMap
+class_name World
 
 
 signal pollution_changed(new_val: int)
