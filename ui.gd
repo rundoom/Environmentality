@@ -53,12 +53,13 @@ func set_pollution(new_val: int):
 
 func _input(event):
 	if building_shadow != null and event is InputEventMouseMotion:
-		var snapped_pos = world.map_to_local(world.local_to_map(event.position))
+		var snapped_pos = world.map_to_local(world.local_to_map(event.position)) + Vector2(world.tile_set.tile_size / 2)
 		building_shadow.position = snapped_pos
 		
 	if building_shadow != null and event is InputEventMouseButton and !building_shadow.is_overlapping:
 		building_shadow.queue_free()
 		var real_tree = TreeSc.instantiate()
+		real_tree.created_in_runtime = true
 		real_tree.position = building_shadow.position
 		world.add_child(real_tree)
 		

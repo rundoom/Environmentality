@@ -6,10 +6,11 @@ class_name PollutionEmitter
 @export var place_cooldown := 5.0
 @onready var space_state = get_world_2d().direct_space_state
 @onready var world = GeneralLogic.get_world()
+var created_in_runtime = false
 
 
 func _ready() -> void:
-	position = world.map_to_local(world.local_to_map(position))
+	if !created_in_runtime: position = world.map_to_local(world.local_to_map(position)) + Vector2(world.tile_set.tile_size / 2)
 	
 	get_tree().create_timer(0.1).timeout.connect(remove_nav)
 

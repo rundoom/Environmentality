@@ -5,6 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkvjs"]
 
 [node name="Goblin" type="CharacterBody2D"]
+input_pickable = true
 script = ExtResource("1_ilf7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -13,4 +14,5 @@ debug_color = Color(0, 0.121569, 0.14902, 1)
 
 [node name="Navigator" type="NavigationAgent2D" parent="."]
 
-[connection signal="velocity_computed" from="Navigator" to="." method="_on_navigator_velocity_computed"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
