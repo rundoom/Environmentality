@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://4w2fkcmqewcn"]
+[gd_scene load_steps=5 format=3 uid="uid://4w2fkcmqewcn"]
 
 [ext_resource type="PackedScene" uid="uid://caah2563ctbbe" path="res://evil_factory.tscn" id="1_ms46o"]
 [ext_resource type="Texture2D" uid="uid://buvqlm34fsdqr" path="res://tree_stub.png" id="1_n7eqb"]
 [ext_resource type="Script" path="res://pollution_emitter.gd" id="2_3n3f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0sx5w"]
+size = Vector2(126, 126)
 
 [node name="Tree" instance=ExtResource("1_ms46o")]
 script = ExtResource("2_3n3f3")
 pollution_change = -10
 place_cooldown = 1.0
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="0"]
 texture = ExtResource("1_n7eqb")
+
+[node name="HitBox" parent="." index="1"]
+shape = SubResource("RectangleShape2D_0sx5w")

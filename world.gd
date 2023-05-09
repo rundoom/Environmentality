@@ -15,7 +15,7 @@ var pollution: int = 0:
 func set_pollution(val):
 		pollution_changed.emit(val)
 		pollution = clamp(val, 0, 9223372036854775807)
-		
+
 
 func change_pollution(val):
 		pollution += val

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-@onready var world = get_tree().get_first_node_in_group("world")
+@onready var world = get_tree().get_first_node_in_group("world") as World
 
 
 var abbreviation = {
@@ -53,12 +53,13 @@ func set_pollution(new_val: int):
 
 func _input(event):
 	if building_shadow != null and event is InputEventMouseMotion:
-		building_shadow.position = event.position
+		var snapped_pos = world.map_to_local(world.local_to_map(event.position))
+		building_shadow.position = snapped_pos
 		
 	if building_shadow != null and event is InputEventMouseButton and !building_shadow.is_overlapping:
 		building_shadow.queue_free()
 		var real_tree = TreeSc.instantiate()
-		real_tree.position = event.position
+		real_tree.position = building_shadow.position
 		world.add_child(real_tree)
 		
 		var cooldown_tween = get_tree().create_tween()
