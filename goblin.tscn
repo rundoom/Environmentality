@@ -13,6 +13,12 @@ shape = SubResource("CircleShape2D_hkvjs")
 debug_color = Color(0, 0.121569, 0.14902, 1)
 
 [node name="Navigator" type="NavigationAgent2D" parent="."]
+target_desired_distance = 20.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="target_reached" from="Navigator" to="." method="_on_navigator_target_reached"]
+[connection signal="timeout" from="Timer" to="." method="set_endpoint"]
