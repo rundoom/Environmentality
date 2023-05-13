@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cu5m8fetnb84h"]
+[gd_scene load_steps=5 format=3 uid="uid://cu5m8fetnb84h"]
 
 [ext_resource type="Script" path="res://goblin.gd" id="1_ilf7p"]
+[ext_resource type="Script" path="res://DeathParticles.gd" id="2_p1oe3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkvjs"]
 
+[sub_resource type="Gradient" id="Gradient_ucsol"]
+offsets = PackedFloat32Array(0, 0.559006, 1)
+colors = PackedColorArray(0, 0.529412, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="Goblin" type="CharacterBody2D"]
 input_pickable = true
+motion_mode = 1
+safe_margin = 5.0
 script = ExtResource("1_ilf7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -14,11 +21,42 @@ debug_color = Color(0, 0.121569, 0.14902, 1)
 
 [node name="Navigator" type="NavigationAgent2D" parent="."]
 target_desired_distance = 20.0
+avoidance_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
+autostart = true
+
+[node name="DeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.25
+fixed_fps = 30
+emission_shape = 2
+emission_sphere_radius = 10.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 100.0
+scale_amount_min = 5.0
+scale_amount_max = 5.0
+color_ramp = SubResource("Gradient_ucsol")
+hue_variation_max = 0.46
+script = ExtResource("2_p1oe3")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-5, -9, -3, -10, 0, -10, 3, -10, 5, -9, 8, -7, 10, -4, 10, 2, 8, 7, 3, 10, -3, 10, -9, 6, -11, -1, -9, -6)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 3.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="target_reached" from="Navigator" to="." method="_on_navigator_target_reached"]
+[connection signal="velocity_computed" from="Navigator" to="." method="_on_navigator_velocity_computed"]
 [connection signal="timeout" from="Timer" to="." method="set_endpoint"]

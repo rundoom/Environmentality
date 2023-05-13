@@ -17,3 +17,9 @@ func _on_spawn_timer_timeout() -> void:
 			goblin.global_position = point.position
 			GeneralLogic.get_world().add_child.call_deferred(goblin)
 			break
+
+
+func _ready() -> void:
+	super._ready()
+	if OS.is_debug_build():
+		_on_spawn_timer_timeout()

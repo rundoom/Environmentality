@@ -7,7 +7,7 @@
 size = Vector2(126, 126)
 
 [node name="Tree" type="StaticBody2D" groups=["navigation_occluder", "pollution_changer"]]
-collision_layer = 5
+collision_layer = 7
 collision_mask = 5
 script = ExtResource("2_3n3f3")
 pollution_change = -10

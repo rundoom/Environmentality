@@ -56,7 +56,7 @@ func _input(event):
 		var snapped_pos = world.map_to_local(world.local_to_map(event.position)) + Vector2(world.tile_set.tile_size / 2)
 		building_shadow.position = snapped_pos
 		
-	if building_shadow != null and event is InputEventMouseButton and !building_shadow.is_overlapping:
+	if building_shadow != null and event is InputEventMouseButton and event.get_button_index() == MOUSE_BUTTON_LEFT and !building_shadow.is_overlapping:
 		building_shadow.queue_free()
 		var real_tree = TreeSc.instantiate()
 		real_tree.created_in_runtime = true
@@ -71,6 +71,8 @@ func _input(event):
 		for it in get_tree().get_nodes_in_group("cooldown_holder"):
 			it.value = it.max_value
 			cooldown_tween.tween_property(it, "value", 0, real_tree.place_cooldown)
+	if building_shadow != null and event is InputEventMouseButton and event.get_button_index() == MOUSE_BUTTON_RIGHT:
+		building_shadow.queue_free()
 			
 
 func _on_create_tree_pressed() -> void:
