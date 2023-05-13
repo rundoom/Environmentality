@@ -12,7 +12,7 @@ _data = {
 }
 point_count = 5
 
-[node name="EvilFactory" type="StaticBody2D" groups=["navigation_occluder", "pollution_changer"]]
+[node name="EvilFactory" type="StaticBody2D" groups=["evil_factory", "navigation_occluder", "pollution_changer"]]
 collision_layer = 7
 collision_mask = 5
 script = ExtResource("1_qvgby")

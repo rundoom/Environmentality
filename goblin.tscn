@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu5m8fetnb84h"]
+[gd_scene load_steps=6 format=3 uid="uid://cu5m8fetnb84h"]
 
 [ext_resource type="Script" path="res://goblin.gd" id="1_ilf7p"]
 [ext_resource type="Script" path="res://DeathParticles.gd" id="2_p1oe3"]
@@ -8,6 +8,9 @@
 [sub_resource type="Gradient" id="Gradient_ucsol"]
 offsets = PackedFloat32Array(0, 0.559006, 1)
 colors = PackedColorArray(0, 0.529412, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0a78e"]
+radius = 20.0
 
 [node name="Goblin" type="CharacterBody2D"]
 input_pickable = true
@@ -20,12 +23,9 @@ shape = SubResource("CircleShape2D_hkvjs")
 debug_color = Color(0, 0.121569, 0.14902, 1)
 
 [node name="Navigator" type="NavigationAgent2D" parent="."]
-target_desired_distance = 20.0
+path_desired_distance = 25.0
+target_desired_distance = 25.0
 avoidance_enabled = true
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
 
 [node name="DeathParticles" type="CPUParticles2D" parent="."]
 emitting = false
@@ -55,8 +55,16 @@ polygon = PackedVector2Array(-5, -9, -3, -10, 0, -10, 3, -10, 5, -9, 8, -7, 10, 
 [node name="Line2D" type="Line2D" parent="."]
 width = 3.0
 
+[node name="CollisionChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionChecker"]
+shape = SubResource("CircleShape2D_0a78e")
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="target_reached" from="Navigator" to="." method="_on_navigator_target_reached"]
 [connection signal="velocity_computed" from="Navigator" to="." method="_on_navigator_velocity_computed"]
-[connection signal="timeout" from="Timer" to="." method="set_endpoint"]
+[connection signal="body_entered" from="CollisionChecker" to="." method="_on_collision_checker_body_entered"]
