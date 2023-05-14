@@ -21,7 +21,6 @@ GeneralLogic="*res://general_logic.gd"
 
 [display]
 
-window/size/viewport_width=1280
 window/size/viewport_height=640
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://elf_cursor_stub.png"

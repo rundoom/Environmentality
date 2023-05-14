@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var SPEED = 150
+@export var SPEED = 200
 @onready var FactorySc := load("res://evil_factory.tscn") as PackedScene
 var under_cursor = false
 @onready var ui = get_tree().get_first_node_in_group("UI")

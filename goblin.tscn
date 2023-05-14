@@ -53,6 +53,7 @@ polygon = PackedVector2Array(-5, -9, -3, -10, 0, -10, 3, -10, 5, -9, 8, -7, 10, 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 width = 3.0
 
 [node name="CollisionChecker" type="Area2D" parent="."]

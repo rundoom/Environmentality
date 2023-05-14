@@ -4,6 +4,8 @@ extends PollutionEmitter
 var GoblicSc = preload("res://goblin.tscn")
 
 var build_step := 0.1
+var under_cursor = false
+@onready var ui = get_tree().get_first_node_in_group("UI")
 
 
 func _on_spawn_timer_timeout() -> void:
@@ -30,3 +32,18 @@ func _ready() -> void:
 
 func build_inc():
 	build_progress += build_step
+
+
+func _on_mouse_entered() -> void:
+	under_cursor = true
+
+
+func _on_mouse_exited() -> void:
+	under_cursor = false
+	
+	
+func _input(event: InputEvent) -> void:
+	if under_cursor and event is InputEventMouseButton and ui.is_destroyer:
+		ui.set_cooldown(20)
+		ui.is_destroyer = false
+		queue_free()

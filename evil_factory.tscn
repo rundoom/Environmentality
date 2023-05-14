@@ -15,10 +15,9 @@ point_count = 5
 [node name="EvilFactory" type="StaticBody2D" groups=["evil_factory", "navigation_occluder", "pollution_changer"]]
 collision_layer = 7
 collision_mask = 5
+input_pickable = true
 script = ExtResource("1_qvgby")
 pollution_change = 20
-place_cooldown = null
-build_progress = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_u0pfq")
@@ -27,7 +26,7 @@ texture = ExtResource("1_u0pfq")
 shape = SubResource("RectangleShape2D_g6oqt")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 6.0
+wait_time = 3.0
 autostart = true
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -36,4 +35,7 @@ curve = SubResource("Curve2D_y3ona")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-70, -70)
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="tree_exiting" from="." to="." method="restore_nav"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

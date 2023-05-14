@@ -55,15 +55,19 @@ autostart = true
 position = Vector2(987, 366)
 
 [node name="EvilFactory" parent="." instance=ExtResource("5_x4r0a")]
-position = Vector2(440, 468)
+position = Vector2(1002, 520)
 build_progress = 1.0
 
 [node name="EvilFactory2" parent="." instance=ExtResource("5_x4r0a")]
-position = Vector2(120, 399)
+position = Vector2(124, 511)
+build_progress = 1.0
+
+[node name="EvilFactory4" parent="." instance=ExtResource("5_x4r0a")]
+position = Vector2(127, 161)
 build_progress = 1.0
 
 [node name="EvilFactory3" parent="." instance=ExtResource("5_x4r0a")]
-position = Vector2(800.147, 239.666)
+position = Vector2(1027, 133)
 build_progress = 1.0
 
 [node name="ElfCursorStub" type="Sprite2D" parent="."]

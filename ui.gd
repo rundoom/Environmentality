@@ -32,12 +32,13 @@ var TreeSc = preload("res://tree.tscn")
 var ShadowSc = preload("res://shadow_building.tscn")
 
 var building_shadow: Node2D
+var is_destroyer = false
 		
 		
 func _ready() -> void:
 	tweening_interval = world.pollution_tick
 
-		
+
 func set_tweening_interval(val: float):
 	tweening_interval = val
 
@@ -61,13 +62,11 @@ func _input(event):
 		real_tree.position = building_shadow.position
 		world.add_child(real_tree)
 		
-		toogle_cooldown_lockable(true)
-		
-		for it in get_tree().get_nodes_in_group("cooldown_holder"):
-			it.max_value = real_tree.place_cooldown
-			it.value = it.max_value
-	if building_shadow != null and event is InputEventMouseButton and event.get_button_index() == MOUSE_BUTTON_RIGHT:
-		building_shadow.queue_free()
+		set_cooldown(real_tree.place_cooldown)
+	if event is InputEventMouseButton and event.get_button_index() == MOUSE_BUTTON_RIGHT:
+		var is_destroyer = false
+		if building_shadow != null: 
+			building_shadow.queue_free()
 
 
 func _on_create_tree_pressed() -> void:
@@ -85,4 +84,14 @@ func reduce_cooldown():
 	for it in get_tree().get_nodes_in_group("cooldown_holder"):
 		it.value = clamp(it.value - 1, 0, 2048)
 		if it.value == 0: toogle_cooldown_lockable(false)
-			
+		
+
+func set_cooldown(val: int):
+	for it in get_tree().get_nodes_in_group("cooldown_holder"):
+		it.max_value = val
+		it.value = it.max_value
+		toogle_cooldown_lockable(true)
+
+
+func _on_destroy_building_pressed() -> void:
+	is_destroyer = true
