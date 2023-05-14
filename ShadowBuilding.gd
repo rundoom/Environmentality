@@ -13,10 +13,9 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if !get_overlapping_bodies().is_empty():
-		modulate.g = 0
-		modulate.b = 0
-		is_overlapping = true
+	modulate.g = 0
+	modulate.b = 0
+	is_overlapping = true
 
 
 func _on_body_exited(body: Node2D) -> void:

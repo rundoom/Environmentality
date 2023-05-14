@@ -8,10 +8,11 @@ var under_cursor = false
 @onready var space_state = get_world_2d().direct_space_state
 @onready var world = GeneralLogic.get_world()
 @onready var factory: PollutionEmitter
-
+signal exploded
 
 func _ready() -> void:
 	set_endpoint()
+	exploded.connect(ui. reduce_cooldown)
 
 
 func set_endpoint():
@@ -49,6 +50,7 @@ func _on_mouse_exited() -> void:
 
 func _input(event: InputEvent) -> void:
 	if under_cursor and event is InputEventMouseButton and ui.building_shadow == null:
+		exploded.emit()
 		$DeathParticles.explode()
 		queue_free()
 

@@ -3,10 +3,14 @@ class_name PollutionEmitter
 
 
 @export var pollution_change := 10
-@export var place_cooldown := 5.0
+@export var place_cooldown := 5
 @onready var space_state = get_world_2d().direct_space_state
 @onready var world = GeneralLogic.get_world()
 var created_in_runtime = false
+@export var build_progress : float:
+	set(val):
+		modulate.a = val
+		build_progress = val
 
 
 func _ready() -> void:

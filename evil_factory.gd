@@ -4,10 +4,6 @@ extends PollutionEmitter
 var GoblicSc = preload("res://goblin.tscn")
 
 var build_step := 0.1
-@export var build_progress : float = 0:
-	set(val):
-		modulate.a = val
-		build_progress = val
 
 
 func _on_spawn_timer_timeout() -> void:

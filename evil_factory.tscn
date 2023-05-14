@@ -17,6 +17,8 @@ collision_layer = 7
 collision_mask = 5
 script = ExtResource("1_qvgby")
 pollution_change = 20
+place_cooldown = null
+build_progress = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_u0pfq")

@@ -10,8 +10,6 @@ var abbreviation = {
 	1000: "K",
 }
 
-var global_cooldown := 0
-
 var text_template = "{0}{1}"
 var old_pollution := 0:
 	set(value):
@@ -63,17 +61,14 @@ func _input(event):
 		real_tree.position = building_shadow.position
 		world.add_child(real_tree)
 		
-		var cooldown_tween = get_tree().create_tween()
-		cooldown_tween.set_parallel(true)
 		toogle_cooldown_lockable(true)
-		cooldown_tween.finished.connect(toogle_cooldown_lockable.bind(false))
 		
 		for it in get_tree().get_nodes_in_group("cooldown_holder"):
+			it.max_value = real_tree.place_cooldown
 			it.value = it.max_value
-			cooldown_tween.tween_property(it, "value", 0, real_tree.place_cooldown)
 	if building_shadow != null and event is InputEventMouseButton and event.get_button_index() == MOUSE_BUTTON_RIGHT:
 		building_shadow.queue_free()
-			
+
 
 func _on_create_tree_pressed() -> void:
 	building_shadow = ShadowSc.instantiate()
@@ -84,3 +79,10 @@ func _on_create_tree_pressed() -> void:
 func toogle_cooldown_lockable(disable: bool):
 	for button in get_tree().get_nodes_in_group("cooldown_lockable"):
 		button.disabled = disable
+
+
+func reduce_cooldown():
+	for it in get_tree().get_nodes_in_group("cooldown_holder"):
+		it.value = clamp(it.value - 1, 0, 2048)
+		if it.value == 0: toogle_cooldown_lockable(false)
+			
